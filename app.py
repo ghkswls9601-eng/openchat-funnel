@@ -64,3 +64,8 @@ def admin(request: Request):
         name="admin.html",
         context={"rows": rows}
     )
+
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}

@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><title>OpenChat Dashboard</title>
+<style>
+body{font-family:Arial,"Malgun Gothic",sans-serif;max-width:900px;margin:50px auto;padding:20px}
+code{background:#eee;padding:4px 7px;border-radius:5px}
+table{width:100%;border-collapse:collapse;margin-top:30px}
+th,td{padding:14px;border-bottom:1px solid #ddd;text-align:left}
+</style></head><body>
+<h1>OpenChat 유입 대시보드</h1>
+<p>테스트 링크: <code>http://127.0.0.1:8000/go/naver01</code></p>
+<table><tr><th>유입 코드</th><th>방문</th><th>오픈채팅 클릭</th><th>전환율</th></tr>
+{% for r in rows %}
+<tr><td>{{r.source}}</td><td>{{r.visits}}</td><td>{{r.clicks}}</td>
+<td>{% if r.visits %}{{"%.1f"|format(r.clicks/r.visits*100)}}%{% else %}0%{% endif %}</td></tr>
+{% endfor %}
+</table></body></html>
