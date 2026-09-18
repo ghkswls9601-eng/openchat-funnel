@@ -1,0 +1,13 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{box-sizing:border-box}body{margin:0;background:#f4f6f9;color:#151922;font-family:Arial,'Noto Sans KR',sans-serif}
+.wrap{max-width:1050px;margin:42px auto;padding:18px}.card{background:#fff;border:1px solid #e5e8ed;border-radius:18px;padding:25px;margin-bottom:17px}
+h1{margin:5px 0 12px;font-size:30px}h2{font-size:20px}.muted{color:#7b8492;font-size:13px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.metric{font-size:31px;font-weight:800}.top{display:flex;justify-content:space-between;align-items:center;gap:15px}
+input,select{width:100%;padding:12px;margin:6px 0 11px;border:1px solid #d9dee7;border-radius:10px}
+button,.btn{border:0;background:#1769e0;color:#fff;padding:13px 18px;border-radius:10px;text-decoration:none;font-weight:700;cursor:pointer}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:12px;border-bottom:1px solid #eee}a{color:#1769e0}
+.hero{max-width:720px;margin:40px auto;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 12px 40px #00000012}.hero img{width:100%;display:block}
+.hero-content{padding:28px}.hero p{line-height:1.7;color:#596273}.cta{display:block;text-align:center;padding:17px;font-size:17px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.top{flex-direction:column;align-items:flex-start}.wrap{margin-top:15px}table{font-size:12px}}</style></head>
+<body><div class="wrap" style="max-width:450px"><div class="card"><h1>관리자 로그인</h1>
+{% if error %}<p style="color:#b00020">비밀번호가 올바르지 않습니다.</p>{% endif %}
+<form method="post"><input type="password" name="password" placeholder="관리자 비밀번호" required><button style="width:100%">로그인</button></form></div></div></body></html>
