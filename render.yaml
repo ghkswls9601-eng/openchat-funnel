@@ -2,7 +2,15 @@ services:
   - type: web
     name: openchat-funnel
     runtime: python
-    plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
+    envVars:
+      - key: OPENCHAT_URL
+        value: https://open.kakao.com/o/gSRhTTBi
+      - key: BASE_URL
+        value: https://openchat-funnel.onrender.com
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: COOKIE_SECRET
+        generateValue: true

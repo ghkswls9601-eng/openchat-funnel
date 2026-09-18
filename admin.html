@@ -1,16 +1,19 @@
-<!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><title>OpenChat Dashboard</title>
-<style>
-body{font-family:Arial,"Malgun Gothic",sans-serif;max-width:900px;margin:50px auto;padding:20px}
-code{background:#eee;padding:4px 7px;border-radius:5px}
-table{width:100%;border-collapse:collapse;margin-top:30px}
-th,td{padding:14px;border-bottom:1px solid #ddd;text-align:left}
-</style></head><body>
-<h1>OpenChat 유입 대시보드</h1>
-<p>테스트 링크: <code>http://127.0.0.1:8000/go/naver01</code></p>
-<table><tr><th>유입 코드</th><th>방문</th><th>오픈채팅 클릭</th><th>전환율</th></tr>
-{% for r in rows %}
-<tr><td>{{r.source}}</td><td>{{r.visits}}</td><td>{{r.clicks}}</td>
-<td>{% if r.visits %}{{"%.1f"|format(r.clicks/r.visits*100)}}%{% else %}0%{% endif %}</td></tr>
-{% endfor %}
-</table></body></html>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{box-sizing:border-box}body{margin:0;background:#f4f6f9;color:#151922;font-family:Arial,'Noto Sans KR',sans-serif}
+.wrap{max-width:1050px;margin:42px auto;padding:18px}.card{background:#fff;border:1px solid #e5e8ed;border-radius:18px;padding:25px;margin-bottom:17px}
+h1{margin:5px 0 12px;font-size:30px}h2{font-size:20px}.muted{color:#7b8492;font-size:13px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.metric{font-size:31px;font-weight:800}.top{display:flex;justify-content:space-between;align-items:center;gap:15px}
+input,select{width:100%;padding:12px;margin:6px 0 11px;border:1px solid #d9dee7;border-radius:10px}
+button,.btn{border:0;background:#1769e0;color:#fff;padding:13px 18px;border-radius:10px;text-decoration:none;font-weight:700;cursor:pointer}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:12px;border-bottom:1px solid #eee}a{color:#1769e0}
+.hero{max-width:720px;margin:40px auto;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 12px 40px #00000012}.hero img{width:100%;display:block}
+.hero-content{padding:28px}.hero p{line-height:1.7;color:#596273}.cta{display:block;text-align:center;padding:17px;font-size:17px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.top{flex-direction:column;align-items:flex-start}.wrap{margin-top:15px}table{font-size:12px}}</style></head><body>
+<div class="wrap"><div class="top"><div><div class="muted">BUNYANG KNOCK</div><h1>오픈채팅 유입 대시보드</h1></div><div><a href="/export.csv">CSV 다운로드</a> · <a href="/logout">로그아웃</a></div></div>
+<div class="grid"><div class="card"><div class="muted">{{days}}일 방문</div><div class="metric">{{visits}}</div></div>
+<div class="card"><div class="muted">오픈채팅 클릭</div><div class="metric">{{clicks}}</div></div>
+<div class="card"><div class="muted">전환율</div><div class="metric">{{ (clicks/visits*100)|round(1) if visits else 0 }}%</div></div></div>
+<div class="card"><div class="top"><h2>새 캠페인</h2><div><a href="/admin?days=1">오늘</a> · <a href="/admin?days=7">7일</a> · <a href="/admin?days=30">30일</a></div></div>
+<form method="post" action="/campaign"><input name="title" placeholder="캠페인 이름" required><select name="channel"><option>네이버블로그</option><option>네이버카페</option><option>인스타그램</option><option>유튜브</option><option>기타</option></select><input name="code" placeholder="추적코드 예: blog-busan-01" required><button>캠페인 생성</button></form></div>
+<div class="card"><h2>성과</h2><table><tr><th>코드</th><th>캠페인</th><th>채널</th><th>방문</th><th>클릭</th><th>전환율</th></tr>
+{% for r in rows %}<tr><td><b>{{r.source}}</b></td><td>{{r.title}}</td><td>{{r.channel}}</td><td>{{r.visits}}</td><td>{{r.clicks}}</td><td>{{r.rate}}%</td></tr>{% else %}<tr><td colspan="6">아직 데이터가 없습니다.</td></tr>{% endfor %}</table></div>
+<div class="card"><h2>생성된 캠페인 링크</h2>{% for c in campaigns %}<p><b>{{c.title}}</b> — <code>{{base_url}}/go/{{c.code}}</code></p>{% else %}<p class="muted">캠페인을 만들면 링크가 여기에 표시됩니다.</p>{% endfor %}</div></div></body></html>
